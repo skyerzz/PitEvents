@@ -1,0 +1,16 @@
+[
+{
+  "modid": "pitevents",
+  "name": "Pit Events",
+  "description": "Shows Pit Events Better.",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "http://www.skyerzz.com/minecraft/mods/tweetchieve/pitevents",
+  "updateUrl": "",
+  "authorList": ["skyerzz"],
+  "credits": "Hoopless for being a nerd <3",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
