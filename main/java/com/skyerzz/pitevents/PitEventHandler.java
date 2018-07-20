@@ -122,6 +122,9 @@ public class PitEventHandler {
     public void loop(TickEvent.ClientTickEvent e){
         if(e.side== Side.CLIENT && e.phase== TickEvent.Phase.END){
             long time = System.currentTimeMillis();
+            if(lastTickTime==-1){
+                lastTickTime = time;
+            }
             if(lastTickTime +1000 < time){
                 if(Minecraft.getMinecraft()!=null && Minecraft.getMinecraft().theWorld!=null && Minecraft.getMinecraft().theWorld.getScoreboard()!=null && Minecraft.getMinecraft().theWorld.getScoreboard().getObjectiveInDisplaySlot(1)!=null) {
                     ScoreObjective objective = Minecraft.getMinecraft().theWorld.getScoreboard().getObjectiveInDisplaySlot(1);
@@ -132,7 +135,7 @@ public class PitEventHandler {
                         PitEventHandler.getInstance().reset();
                     }
                 }
-                lastTickTime = time;
+                lastTickTime += time;
                 //System.out.println("Second");
                 Event toRemove = null;
                 //System.out.println(events.toString());
