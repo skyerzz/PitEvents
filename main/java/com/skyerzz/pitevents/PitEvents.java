@@ -14,7 +14,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 public class PitEvents
 {
     public static final String MODID = "pitevents";
-    public static final String VERSION = "1.1";
+    public static final String VERSION = "1.2";
 
     public static Configuration config;
 
@@ -35,11 +35,11 @@ public class PitEvents
     public void init(FMLInitializationEvent event)
     {
         Settings.initialise();
-        MinecraftForge.EVENT_BUS.register(new ChatListener());
         MinecraftForge.EVENT_BUS.register(PitEventHandler.getInstance());
         new PitEventGUI();
         SongPlayer.getInstance();
         ClientCommandHandler.instance.registerCommand(new PitEventsCommand());
+        MinecraftForge.EVENT_BUS.register(new ChatListener());
 
         //PitEventHandler.getInstance().addEvent(new Event("Test", "Some String", "Some location", -1));
     }

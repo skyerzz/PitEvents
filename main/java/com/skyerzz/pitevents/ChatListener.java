@@ -17,7 +17,6 @@ public class ChatListener {
     Pattern looted = Pattern.compile("^LOOTED.*?care package");
 
     public ChatListener(){
-        System.out.println("chat <3");
     }
 
     @SubscribeEvent
@@ -83,6 +82,9 @@ public class ChatListener {
             }
         }else if(message.contains("EVENT!")){
             System.out.println("No Match for \"" + message + "\".");
+        }else if(message.contains("DRAGON EGG OVER") || message.contains("DRAGON EGG! event over!")){
+            PitEventHandler.getInstance().reset();
+            System.out.println("Dragon egg over, resetting events!");
         }else{
             Matcher lootm = looted.matcher(message);
             boolean lootmatch = lootm.matches();

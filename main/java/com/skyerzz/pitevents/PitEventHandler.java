@@ -125,29 +125,33 @@ public class PitEventHandler {
             if(lastTickTime==-1){
                 lastTickTime = time;
             }
-            if(lastTickTime +1000 < time){
-                if(Minecraft.getMinecraft()!=null && Minecraft.getMinecraft().theWorld!=null && Minecraft.getMinecraft().theWorld.getScoreboard()!=null && Minecraft.getMinecraft().theWorld.getScoreboard().getObjectiveInDisplaySlot(1)!=null) {
-                    ScoreObjective objective = Minecraft.getMinecraft().theWorld.getScoreboard().getObjectiveInDisplaySlot(1);
-                    if (objective.getName().equalsIgnoreCase("pit")) {
-                        isInPitGamemode = true;
-                    } else {
-                        isInPitGamemode = false;
-                        PitEventHandler.getInstance().reset();
+            if (lastTickTime + 1000 < time) {
+                synchronized (this) {
+                    if (lastTickTime + 1000 < time) {
+                        lastTickTime += 1000;
+                        if (Minecraft.getMinecraft() != null && Minecraft.getMinecraft().theWorld != null && Minecraft.getMinecraft().theWorld.getScoreboard() != null && Minecraft.getMinecraft().theWorld.getScoreboard().getObjectiveInDisplaySlot(1) != null) {
+                            ScoreObjective objective = Minecraft.getMinecraft().theWorld.getScoreboard().getObjectiveInDisplaySlot(1);
+                            if (objective.getName().equalsIgnoreCase("pit")) {
+                                isInPitGamemode = true;
+                            } else {
+                                isInPitGamemode = false;
+                                PitEventHandler.getInstance().reset();
+                            }
+                        }
+                        //System.out.println("Second");
+                        Event toRemove = null;
+                        //System.out.println(events.toString());
+                        for (Event ev : events) {
+                            if (ev.tick()) {
+                                System.out.println("[PitEvents] Removing event " + ev.getName() + " : " + ev.getLocation());
+                                toRemove = ev;
+                                break;
+                            }
+                        }
+                        if (toRemove != null) {
+                            events.remove(toRemove);
+                        }
                     }
-                }
-                lastTickTime += time;
-                //System.out.println("Second");
-                Event toRemove = null;
-                //System.out.println(events.toString());
-                for(Event ev: events){
-                    if(ev.tick()){
-                        System.out.println("[PitEvents] Removing event " + ev.getName() + " : " + ev.getLocation());
-                        toRemove = ev;
-                        break;
-                    }
-                }
-                if(toRemove!=null){
-                    events.remove(toRemove);
                 }
             }
         }

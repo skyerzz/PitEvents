@@ -32,7 +32,7 @@ public class PitEventGUI {
 
     private static final ResourceLocation icons = new ResourceLocation(PitEvents.MODID, "textures/overlay/IconsPitEvents.png");
 
-    private static final int CARE_PACKAGE = 0, TDM = 1, KOTH = 2, DOUBLE_COINS = 3, MATHS = 4, ROBBERY = 5, BEAST = 6, RAGE_PIT = 7, RAFFLE = 8, UNKNOWN = 56;
+    private static final int CARE_PACKAGE = 0, TDM = 1, KOTH = 2, DOUBLE_COINS = 3, MATHS = 4, ROBBERY = 5, BEAST = 6, RAGE_PIT = 7, RAFFLE = 8, PIZZA = 9, DRAGONEGG = 10, UNKNOWN = 56;
 
     private static final int Ctime = 0xFFFF0000, Cbrack = 0xFFb2a4a4, Cloc = 0xFF4eb218, Cname = 0xFF11ddda;
 
@@ -129,6 +129,8 @@ public class PitEventGUI {
             case "beast": drawItem = BEAST;break;
             case "rage pit": drawItem = RAGE_PIT;break;
             case "raffle": drawItem = RAFFLE;break;
+            case "pizza": drawItem = PIZZA;break;
+            case "dragon egg": drawItem = DRAGONEGG;break;
         }
         String timeLeft = null;
         if(e.getTimeLeft()>=0){
